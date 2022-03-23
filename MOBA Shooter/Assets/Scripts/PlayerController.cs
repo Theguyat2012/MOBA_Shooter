@@ -32,6 +32,6 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        GameObject shot = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.6f), transform.rotation);
+        GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation);
     }
 }

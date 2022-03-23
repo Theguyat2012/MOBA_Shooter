@@ -16,8 +16,6 @@ public class ProjectileController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(0.0f, 0.0f, 1.0f);
-
-        rb.velocity = movement * speed;
+        rb.velocity = transform.forward * speed;
     }
 }
