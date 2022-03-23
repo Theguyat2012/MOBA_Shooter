@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public GameObject projectile;
 
     private float movementX, movementY;
 
@@ -27,5 +28,10 @@ public class PlayerController : MonoBehaviour
 
         movementX = movementVector.x * speed;
         movementY = movementVector.y * speed;
+    }
+
+    void OnFire()
+    {
+        GameObject shot = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.6f), transform.rotation);
     }
 }
