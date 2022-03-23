@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
+        transform.Translate(movementX * Time.deltaTime, 0, movementY * Time.deltaTime, Space.World);
     }
 
     void OnMove(InputValue movementValue)
@@ -32,6 +32,6 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        GameObject shot = Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.6f), transform.rotation);
+        GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation);
     }
 }
