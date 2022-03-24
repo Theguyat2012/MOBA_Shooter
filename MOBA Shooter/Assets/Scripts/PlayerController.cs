@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     public Camera cam;
 
+    private Rigidbody rb;
     private float movementX, movementY;
     private Vector3 mousePos;
     private float money, income;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody>();
         money = 0;
         income = 1;
         InvokeRepeating("Income", 10f, 10f);
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movementX * Time.deltaTime, 0, movementY * Time.deltaTime, Space.World);
+        rb.velocity = new Vector3 (movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
         FaceMouse();
     }
 
