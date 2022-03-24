@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     public bool inRange;
     public KeyCode key;
-    public UnityEvent action;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +22,7 @@ public class Interactable : MonoBehaviour
         {
             if(Keyboard.current.eKey.wasPressedThisFrame)
             {
-                Debug.Log("YO");
-                action.Invoke();
+                Action();
             }
         }
     }
@@ -44,4 +42,6 @@ public class Interactable : MonoBehaviour
             inRange = false;
         }
     }
+
+    public abstract void Action();
 }

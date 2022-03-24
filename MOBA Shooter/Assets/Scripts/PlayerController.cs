@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
 
     void Income()
     {
-        Debug.Log(money);
         money += income;
     }
 }
