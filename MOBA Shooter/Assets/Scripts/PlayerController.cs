@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    public int health;
     public GameObject projectile;
     public Camera cam;
 
@@ -25,6 +26,11 @@ public class PlayerController : MonoBehaviour
         FaceMouse();
     }
 
+    void FixedUpdate()
+    {
+        HealthCheck();
+    }
+
     void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -38,9 +44,26 @@ public class PlayerController : MonoBehaviour
         GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.tag == "Projectile")
+        {
+            health -= 20;
+        }
+    }
+
     void FaceMouse()
     {
         mousePos = cam.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cam.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
+    }
+
+    void HealthCheck()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
