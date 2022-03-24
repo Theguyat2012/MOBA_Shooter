@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public float speed;
+    public float lifeTime;
 
     private Rigidbody rb;
 
@@ -12,10 +13,19 @@ public class ProjectileController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, lifeTime);
     }
 
     void FixedUpdate()
     {
         rb.velocity = transform.forward * speed;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Indestructible")
+        {
+            Destroy(gameObject);
+        }
     }
 }
