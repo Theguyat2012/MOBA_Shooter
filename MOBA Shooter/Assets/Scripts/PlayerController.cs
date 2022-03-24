@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour
 
     private float movementX, movementY;
     private Vector3 mousePos;
+    private float money, income;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        money = 0;
+        income = 1;
+        InvokeRepeating("Income", 10f, 10f);
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour
         FaceMouse();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         HealthCheck();
     }
@@ -46,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Projectile")
         {
             health -= 20;
@@ -65,5 +67,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Income()
+    {
+        Debug.Log(money);
+        money += income;
     }
 }
