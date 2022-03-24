@@ -18,7 +18,7 @@ public class ProjectileController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = transform.forward * speed;
+        rb.velocity = transform.up * speed;
     }
 
     void OnTriggerEnter(Collider other)

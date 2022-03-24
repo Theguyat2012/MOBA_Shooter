@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation);
+        GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
     }
 
     void FaceMouse()

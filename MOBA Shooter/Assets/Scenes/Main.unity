@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  projectile: {fileID: 7768886991553758791, guid: dfdc79e3d19204a489aa6ef9f681e3b1, type: 3}
+  projectile: {fileID: 7769184227196576501, guid: a84b22bbf448f834f8981408ec7c77a2, type: 3}
   cam: {fileID: 963194227}
 --- !u!54 &1354112253
 Rigidbody:
