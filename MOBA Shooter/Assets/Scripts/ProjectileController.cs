@@ -16,7 +16,7 @@ public class ProjectileController : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    void Update()
+    void LateUpdate()
     {
         rb.velocity = transform.up * speed * Time.deltaTime;
     }
