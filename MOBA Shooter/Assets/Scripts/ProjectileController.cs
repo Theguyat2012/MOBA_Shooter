@@ -21,11 +21,9 @@ public class ProjectileController : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collider)
     {
-        if (other.tag == "Indestructible")
-        {
-            Destroy(gameObject);
-        }
+        Debug.Log("Enter");
+        Destroy(gameObject);
     }
 }
