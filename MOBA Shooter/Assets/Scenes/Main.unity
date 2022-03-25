@@ -335,9 +335,9 @@ GameObject:
   - component: {fileID: 1734150461}
   - component: {fileID: 1734150460}
   - component: {fileID: 1734150465}
-  - component: {fileID: 1734150466}
+  - component: {fileID: 1734150464}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Mystery Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,6 +419,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734150464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734150459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93972cedab58f4a4bae8f2ada3e40269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1734150465
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -432,20 +444,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1734150466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734150459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a600933d5bb85245a8d9b6804563612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inRange: 0
-  key: 101
 --- !u!1001 &500474618847504263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -525,6 +523,34 @@ PrefabInstance:
     - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
       propertyPath: health
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1734150464}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Action
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MysteryBox, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803150383755955506, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
+      propertyPath: mysteryBoxAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8803150383755955507, guid: cae2d9d93561e0740bc610db0efe335f, type: 3}
       propertyPath: m_Interpolate

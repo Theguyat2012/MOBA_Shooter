@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,19 +10,22 @@ public class PlayerController : MonoBehaviour
     public int health;
     public GameObject projectile;
     public Camera cam;
+    public UnityEvent mysteryBoxAction;
 
     private Rigidbody rb;
     private float movementX, movementY;
     private Vector3 mousePos;
     private float money, income;
+    private bool inRangeMysteryBox;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        money = 0;
+        money = 100;
         income = 1;
         InvokeRepeating("Income", 10f, 10f);
+        inRangeMysteryBox = false;
     }
 
     // Update is called once per frame
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector3 (movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
         FaceMouse();
+        MysteryBox();
     }
 
     void LateUpdate()
@@ -55,6 +60,19 @@ public class PlayerController : MonoBehaviour
         {
             health -= 20;
         }
+
+        if (other.tag == "Mystery Box")
+        {
+            inRangeMysteryBox = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Mystery Box")
+        {
+            inRangeMysteryBox = false;
+        }
     }
 
     void FaceMouse()
@@ -74,5 +92,27 @@ public class PlayerController : MonoBehaviour
     void Income()
     {
         money += income;
+    }
+
+    void Pay(float cost)
+    {
+        money -= cost;
+    }
+
+    void MysteryBox()
+    {
+        if (inRangeMysteryBox) {
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                if (money >= 50.0f)
+                {
+                    money -= 50.0f;
+                    mysteryBoxAction.Invoke();
+                } else 
+                {
+                    Debug.Log("Not enough money");
+                }
+            }
+        }
     }
 }
