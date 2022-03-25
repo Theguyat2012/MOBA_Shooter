@@ -16,9 +16,9 @@ public class ProjectileController : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
-        rb.velocity = transform.up * speed * Time.deltaTime;
+        rb.velocity = transform.up * speed;
     }
 
     void OnTriggerEnter(Collider other)
