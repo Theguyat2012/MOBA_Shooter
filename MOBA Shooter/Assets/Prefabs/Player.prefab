@@ -108,8 +108,8 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -156,6 +156,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a50d79c2dce4f4580b6d97701a82e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 500
+  health: 100
   projectile: {fileID: 7769184227196576501, guid: a84b22bbf448f834f8981408ec7c77a2, type: 3}
   cam: {fileID: 500474618703252212, guid: 21bb7e9e708237c42bf4ce63ef796d9b, type: 3}
+  mysteryBoxAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MysteryBox, Assembly-CSharp
+        m_MethodName: Action
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -16,14 +16,16 @@ public class ProjectileController : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        rb.velocity = transform.up * speed;
+        rb.velocity = transform.up * speed * Time.deltaTime;
     }
 
-    void OnCollisionEnter(Collision collider)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter");
-        Destroy(gameObject);
+        if (other.tag == "Indestructible")
+        {
+            Destroy(gameObject);
+        }
     }
 }

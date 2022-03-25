@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
+            Debug.Log("Hit");
+            Destroy(other.gameObject);
             health -= 20;
         }
 
@@ -92,11 +94,6 @@ public class PlayerController : MonoBehaviour
     void Income()
     {
         money += income;
-    }
-
-    void Pay(float cost)
-    {
-        money -= cost;
     }
 
     void MysteryBox()
