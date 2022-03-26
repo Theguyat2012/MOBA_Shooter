@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
     public int health;
-    public GameObject projectile;
     public Camera cam;
+    public GameObject projectile;
     public UnityEvent mysteryBoxAction;
 
     private Rigidbody rb;
@@ -18,27 +19,37 @@ public class PlayerController : MonoBehaviour
     private float money, income;
     private bool inRangeMysteryBox;
 
+    private PhotonView view;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        view = GetComponent<PhotonView>();
         money = 100;
         income = 1;
         InvokeRepeating("Income", 10f, 10f);
         inRangeMysteryBox = false;
+        Instantiate(cam, transform.position + new Vector3(0.0f, 20.0f, 0.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector3 (movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
-        FaceMouse();
-        MysteryBox();
+        if (view.IsMine)
+        {
+            rb.velocity = new Vector3 (movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
+            FaceMouse();
+            MysteryBox();
+        }
     }
 
     void LateUpdate()
     {
-        HealthCheck();
+        if (view.IsMine)
+        {
+            HealthCheck();
+        }
     }
 
     void OnMove(InputValue movementValue)
@@ -79,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     void FaceMouse()
     {
-        mousePos = cam.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cam.transform.position.y));
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
     }
 
@@ -111,5 +122,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Camera GetCamera()
+    {
+        return cam;
     }
 }

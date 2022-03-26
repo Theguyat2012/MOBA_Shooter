@@ -35,9 +35,9 @@ namespace Photon.Pun.Demo.PunBasics
 	    [SerializeField]
 	    private bool followOnStart = false;
 
-	    [Tooltip("The Smoothing for the camera to follow the target")]
-	    [SerializeField]
-	    private float smoothSpeed = 0.125f;
+	    // [Tooltip("The Smoothing for the camera to follow the target")]
+	    // [SerializeField]
+	    // private float smoothSpeed = 0.125f;
 
         // cached transform of the target
         Transform cameraTransform;
@@ -110,10 +110,11 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.z = -distance;
 			cameraOffset.y = height;
 			
-		    cameraTransform.position = Vector3.Lerp(cameraTransform.position, this.transform.position +this.transform.TransformVector(cameraOffset), smoothSpeed*Time.deltaTime);
+		    // cameraTransform.position = Vector3.Lerp(cameraTransform.position, this.transform.position +this.transform.TransformVector(cameraOffset), smoothSpeed*Time.deltaTime);
 
-		    cameraTransform.LookAt(this.transform.position + centerOffset);
-		    
+		    // cameraTransform.LookAt(this.transform.position + centerOffset);
+		    cameraTransform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
+            cameraTransform.rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
 	    }
 
 	   
@@ -122,9 +123,11 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.z = -distance;
 			cameraOffset.y = height;
 
-			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
+			// cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
 
-			cameraTransform.LookAt(this.transform.position + centerOffset);
+			// cameraTransform.LookAt(this.transform.position + centerOffset);
+		    cameraTransform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
+            cameraTransform.rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
 		}
 		#endregion
 	}
