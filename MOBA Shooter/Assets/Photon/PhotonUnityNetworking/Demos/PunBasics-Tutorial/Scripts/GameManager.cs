@@ -69,8 +69,12 @@ namespace Photon.Pun.Demo.PunBasics
 				{
 				    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
 
+					// Start Custom Code
+					Vector3 randomPosition = new Vector3(Random.Range(-24f, -20.5f), 0.5f, Random.Range(-24f, -20.5f));
+					PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, playerPrefab.transform.rotation);
+					// End Custom Code
 					// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-					PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,5f,0f), Quaternion.identity, 0);
+					// PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,5f,0f), Quaternion.identity, 0);
 				}else{
 
 					Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
@@ -87,10 +91,10 @@ namespace Photon.Pun.Demo.PunBasics
 		void Update()
 		{
 			// "back" button of phone equals "Escape". quit app if that's pressed
-			if (Input.GetKeyDown(KeyCode.Escape))
-			{
-				QuitApplication();
-			}
+			// if (Input.GetKeyDown(KeyCode.Escape))
+			// {
+			// 	QuitApplication();
+			// }
 		}
 
         #endregion
