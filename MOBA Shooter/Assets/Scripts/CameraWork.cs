@@ -123,11 +123,9 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.z = -distance;
 			cameraOffset.y = height;
 
-			// cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
+			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
 
-			// cameraTransform.LookAt(this.transform.position + centerOffset);
-		    cameraTransform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
-            cameraTransform.rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
+			cameraTransform.LookAt(this.transform.position + centerOffset);
 		}
 		#endregion
 	}
