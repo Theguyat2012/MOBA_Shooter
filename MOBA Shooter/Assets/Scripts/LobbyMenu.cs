@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class LobbyMenu : MonoBehaviourPunCallbacks
 {
-    public string roomName;
+    private string roomName = "room";
 
-    void Start()
+    public void Start()
     {
         PhotonNetwork.CreateRoom(roomName);
-        Debug.Log("Create " + roomName);
+    }
+
+    public void CreateRoom()
+    {
+        // PhotonNetwork.CreateRoom(roomName, new RoomOptions(){ MaxPlayers = 12});
+        // PhotonNetwork.CreateRoom(roomName);
     }
 
     public void JoinRoom()
     {
-        Debug.Log("Join " + roomName);
         PhotonNetwork.JoinRoom(roomName);
     }
 

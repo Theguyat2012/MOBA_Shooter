@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
             FaceMouse();
             MysteryBox();
             cam.transform.position = new Vector3(transform.position.x, cam.transform.position.y, transform.position.z);
-            Debug.Log(cam.transform.position);
         }
     }
 
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (view.IsMine)
         {
-            GameObject shot = Instantiate(projectile, transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
+            PhotonNetwork.Instantiate("Projectile", transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
         }
     }
 
@@ -80,8 +79,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
-            Debug.Log("Hit");
-            Destroy(other.gameObject);
             health -= 20;
         }
 
@@ -101,7 +98,6 @@ public class PlayerController : MonoBehaviour
 
     void FaceMouse()
     {
-        // mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.transform.position.y));
         mousePos = cam.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cam.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
     }
@@ -110,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -134,10 +130,5 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public Camera GetCamera()
-    {
-        return cam;
     }
 }
