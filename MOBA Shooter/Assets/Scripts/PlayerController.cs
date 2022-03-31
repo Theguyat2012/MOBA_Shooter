@@ -61,17 +61,20 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        if (view.IsMine)
+        {
+            Vector2 movementVector = movementValue.Get<Vector2>();
 
-        movementX = movementVector.x * speed;
-        movementY = movementVector.y * speed;
+            movementX = movementVector.x * speed;
+            movementY = movementVector.y * speed;
+        }
     }
 
     void OnFire()
     {
         if (view.IsMine)
         {
-            PhotonNetwork.Instantiate("Projectile", transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
+            PhotonNetwork.Instantiate(projectile.name, transform.position + transform.forward, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
         }
     }
 
@@ -104,9 +107,15 @@ public class PlayerController : MonoBehaviour
 
     void HealthCheck()
     {
-        if (health <= 0)
+        if (view)
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (view.IsMine)
+            {
+                if (health <= 0)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                }
+            }
         }
     }
 
