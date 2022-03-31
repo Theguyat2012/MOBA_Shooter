@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ProjectileController : MonoBehaviour
 {
@@ -8,24 +9,38 @@ public class ProjectileController : MonoBehaviour
     public float lifeTime;
 
     private Rigidbody rb;
+    private PhotonView view;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, lifeTime);
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        // Destroy(gameObject, lifeTime);
     }
 
     void FixedUpdate()
     {
-        rb.velocity = transform.up * speed;
+        if (view.IsMine)
+        {
+            rb.velocity = transform.up * speed;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Indestructible")
+        if (view)
         {
-            Destroy(gameObject);
+            if (view.IsMine)
+            {
+                if (other.tag == "Indestructible")
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                }
+            }
         }
     }
 }
