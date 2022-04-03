@@ -3,25 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player Components
+    private Rigidbody rb;
+    private PhotonView view;
+
+    // Player Stats
     public float speed;
     public int health;
+    public float money, income;
+
+    // Player Objects
     public Camera camera;
     public GameObject projectile;
     public UnityEvent mysteryBoxAction;
 
-    private Rigidbody rb;
-    private float movementX, movementY;
-    private Vector3 mousePos;
-    private float money, income;
-    private bool inRangeMysteryBox;
-    private Vector3 offset;
-    private Camera cam;
+    // Player UI
+    public Canvas hud;
+    private TextMeshProUGUI textHealth;
+    private TextMeshProUGUI textMoney;
 
-    private PhotonView view;
+    // Player Equipment
+    public int currentWeapon;
+    public GameObject primary;
+    public GameObject secondary;
+    public GameObject melee;
+
+    // Player Controls
+    private float movementX, movementY;
+    private Camera cam;
+    private Vector3 mousePos;
+    private bool inRangeMysteryBox;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +48,17 @@ public class PlayerController : MonoBehaviour
         
         if (view.IsMine)
         {
+            Debug.Log(view);
             rb = gameObject.GetComponent<Rigidbody>();
+            cam = Instantiate(camera, transform.position + camera.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+            hud = Instantiate(hud);
+            textHealth = hud.transform.Find("Health").GetComponent<TextMeshProUGUI>();
+            textMoney = hud.transform.Find("Money").GetComponent<TextMeshProUGUI>();
+
             money = 100;
             income = 1;
             InvokeRepeating("Income", 10f, 10f);
             inRangeMysteryBox = false;
-            cam = Instantiate(camera, transform.position + camera.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
         }
     }
 
@@ -46,6 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3 (movementX * Time.deltaTime, 0, movementY * Time.deltaTime);
             FaceMouse();
+            HudUpdate();
             MysteryBox();
             cam.transform.position = new Vector3(transform.position.x, cam.transform.position.y, transform.position.z);
         }
@@ -83,6 +107,12 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Projectile")
         {
             health -= 20;
+            if (view.IsMine)
+            {
+                // other.gameObject.GetComponent<PhotonView>().RequestOwnership();
+                // other.gameObject.GetComponent<PhotonView>().TransferOwnership(view.CreatorActorNr);
+                PhotonNetwork.Destroy(other.gameObject);
+            }
         }
 
         if (other.tag == "Mystery Box")
@@ -103,6 +133,12 @@ public class PlayerController : MonoBehaviour
     {
         mousePos = cam.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cam.transform.position.y));
         transform.LookAt(mousePos + Vector3.up * transform.position.y);
+    }
+
+    void HudUpdate()
+    {
+        textHealth.text = "Health: " + health.ToString();
+        textMoney.text = "Money: " + money.ToString() + " + " + income.ToString();
     }
 
     void HealthCheck()

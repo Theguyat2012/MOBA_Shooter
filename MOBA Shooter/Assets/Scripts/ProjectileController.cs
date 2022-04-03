@@ -15,18 +15,18 @@ public class ProjectileController : MonoBehaviour
     void Start()
     {
         view = GetComponent<PhotonView>();
-        if (view.IsMine)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+        rb = GetComponent<Rigidbody>();
         // Destroy(gameObject, lifeTime);
     }
 
     void FixedUpdate()
     {
-        if (view.IsMine)
+        if (view)
         {
-            rb.velocity = transform.up * speed;
+            if (view.IsMine)
+            {
+                rb.velocity = transform.up * speed;
+            }
         }
     }
 

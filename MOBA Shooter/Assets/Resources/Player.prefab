@@ -159,12 +159,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
-  health: 10
+  health: 100
+  money: 0
+  income: 0
   camera: {fileID: 3287821836685117999, guid: 53c1b8d5b639dba4187d050bb347f4d0, type: 3}
   projectile: {fileID: 7769184227196576501, guid: a84b22bbf448f834f8981408ec7c77a2, type: 3}
   mysteryBoxAction:
     m_PersistentCalls:
       m_Calls: []
+  hud: {fileID: 5544188934289088884, guid: 1fc802be0bdf250498dc78560794bd2a, type: 3}
+  currentWeapon: 0
+  primary: {fileID: 0}
+  secondary: {fileID: 0}
+  melee: {fileID: 0}
 --- !u!114 &1388354825856984205
 MonoBehaviour:
   m_ObjectHideFlags: 0
